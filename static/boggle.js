@@ -43,15 +43,15 @@ class BoggleGame {
         const $word = $(".word", this.board);
 
         let word = $word.val();
-        if(!word) return;
+        if (!word) return;
 
-        if(this.words.has(word)) {
+        if (this.words.has(word)) {
             this.showMessage(`Already found ${word}`, "err");
             return;
         }
 
     // check server for validity 
-    const resp = await axois.get("/check-word", {params: { word: word}});
+    const resp = await axois.get("/check-word", { params: { word: word }});
     if (resp.data.result === "not-word") {
         this.showMessage(`${word} is not a valid English word`, "err");
     } else if (resp.data.result === "not-on-board") {

@@ -24,7 +24,7 @@ class BoggleGame {
     /* show score in html */
 
     showScore() {
-        $(".score", this.board).text(this.score);
+       $(".score", this.board).text(this.score);
     }
 
     /* show a status message */
@@ -39,19 +39,19 @@ class BoggleGame {
     /* handle submission of word: if unique and valid, score & show */
 
     async handleSubmit(evt) {
-        evt.preventDefault();
-        const $word = $(".word", this.board);
+    evt.preventDefault();
+    const $word = $(".word", this.board);
 
-        let word = $word.val();
-        if (!word) return;
+    let word = $word.val();
+    if (!word) return;
 
-        if (this.words.has(word)) {
-            this.showMessage(`Already found ${word}`, "err");
-            return;
-        }
+    if (this.words.has(word)) {
+      this.showMessage(`Already found ${word}`, "err");
+      return;
+    }
 
     // check server for validity 
-    const resp = await axois.get("/check-word", { params: { word: word }});
+    const resp = await axios.get("/check-word", { params: { word: word }});
     if (resp.data.result === "not-word") {
         this.showMessage(`${word} is not a valid English word`, "err");
     } else if (resp.data.result === "not-on-board") {
